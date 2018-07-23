@@ -42,6 +42,27 @@ func TestCGDefaultSettings(t *testing.T) {
 	}
 }
 
+func TestBCG(t *testing.T) {
+	rnd := rand.New(rand.NewSource(1))
+
+	testCases := spdTestCases(rnd)
+	testCases = append(testCases, unsymTestCases(rnd)...)
+	for _, tc := range testCases {
+		s := newTestSettings(rnd, tc)
+		testMethodWithSettings(t, &BCG{}, s, tc)
+	}
+}
+
+func TestBCGDefaultSettings(t *testing.T) {
+	rnd := rand.New(rand.NewSource(1))
+
+	testCases := spdTestCases(rnd)
+	testCases = append(testCases, unsymTestCases(rnd)...)
+	for _, tc := range testCases {
+		testMethodWithSettings(t, &BCG{}, nil, tc)
+	}
+}
+
 func TestGMRES(t *testing.T) {
 	rnd := rand.New(rand.NewSource(1))
 
